@@ -14,6 +14,14 @@ class ListsController < ApplicationController
 
    render :new
  end
+ 
+ @image =Image.new(image_params)
+ 
+ if @image.save
+     redirect_to @image,notice:"Image uploaded successfully. "
+ else
+     render :new
+ end 
   end
 
  def index
@@ -30,11 +38,7 @@ class ListsController < ApplicationController
      end
 
   def update
-    list =List.find(params[:id])
-    list.update(list_params)
-    redirect_to list_path(list.id)
 
-  end
 
   def destroy
     list=List.find(params[:id])
@@ -47,9 +51,11 @@ private
   def list_params
     params.require(:list).permit(:title, :body, :image)
 
+end
 
-
-
+def image_params
+    params.require(:image).permit(:image)
+end
 
 end
  end

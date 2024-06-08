@@ -19,5 +19,9 @@
 
 <%= f.file_field :image, accept: "image/*" %>
 
+<% @list.images.each do |image| %>
+  <%= image_tag image %>
+<% end %>
+
 <%= f.submit '投稿' %>
 <% end %>
